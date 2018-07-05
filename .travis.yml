@@ -9,6 +9,18 @@ sudo: false
 cache:
   directories:
     - $HOME/.composer/cache
+    
+services:
+  - memcached
+  - redis-server
+  - mysql
+ 
+before_install:
+  - phpenv config-rm xdebug.ini || true
+  - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - printf "\n" | pecl install -f redis
+  - travis_retry composer self-update
+  - mysql -e 'CREATE DATABASE forge;'
 
 before_script:
   - cp .env.example .env
