@@ -35,7 +35,7 @@ before_script:
   - php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="config"
   - php artisan vendor:publish --provider="Spatie\HttpLogger\HttpLoggerServiceProvider" --tag="config"
 
-script:
+#script:
   #- vendor/bin/phpunit --coverage-clover=coverage.xml
   #
 after_success:
