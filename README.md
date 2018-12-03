@@ -9,6 +9,10 @@
 
 ## Contributing
 
+## Contributors
+- [Mark Villudo](https://github.com/MarkVilludo)
+- [Paul Katipunan](https://github.com/paulkatipunan)
+
 ## Security Vulnerabilities
 
 ## License
