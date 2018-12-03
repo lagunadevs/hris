@@ -21,8 +21,8 @@ before_install:
   - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - printf "\n" | pecl install -f redis
   - travis_retry composer self-update
-  - mysql -e 'CREATE DATABASE homestead;'
-  - mysql -e "CREATE USER 'homestead'@'localhost' IDENTIFIED WITH mysql_native_password AS 'secret';GRANT ALL PRIVILEGES ON *.* TO 'homestead'@'localhost' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;"
+  #- mysql -e 'CREATE DATABASE homestead;'
+  #- mysql -e "CREATE USER 'homestead'@'localhost' IDENTIFIED WITH mysql_native_password AS 'secret';GRANT ALL PRIVILEGES ON *.* TO 'homestead'@'localhost' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;"
   
 before_script:
   - cp .env.example .env
