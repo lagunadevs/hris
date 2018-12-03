@@ -6,6 +6,7 @@
 
 ## About HRIS
 
+Attendance monitoring, Leave administration, Personnel Management, Payroll, Recruitment, Performance Management and more..
 
 ## Contributing
 
