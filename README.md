@@ -8,6 +8,8 @@
 
 Attendance monitoring, Leave administration, Personnel Management, Payroll, Recruitment, Performance Management and more..
 
+## Installation
+
 ## Contributing
 1. Fork it.
 2. Create a branch (`git checkout -b my_markup`)
