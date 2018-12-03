@@ -10,6 +10,7 @@
 ## Contributing
 
 ## Contributors
+- [Manny Isles](https://github.com/mannysoft)
 - [Mark Villudo](https://github.com/MarkVilludo)
 - [Paul Katipunan](https://github.com/paulkatipunan)
 
