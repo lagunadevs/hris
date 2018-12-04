@@ -17,6 +17,7 @@ Attendance monitoring, Leave administration, Personnel Management, Payroll, Recr
 4. Push to the branch (`git push origin my_markup`)
 5. Create an [Issue][1] with a link to your branch
 6. Enjoy a refreshing Diet Coke and wait
+7. All text should be put in language files.
 
 https://docs.google.com/document/d/1EKI6tkr3-Yb6Yq47rFlU0LbZ47aNTH5vprqGF9UQ4kE/edit?usp=sharing
 
