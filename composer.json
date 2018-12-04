@@ -14,7 +14,7 @@
         "laravel/telescope": "^1.0",
         "laravel/tinker": "^1.0",
         "mark-villudo/admin-lte": "dev-master",
-        "mark-villudo/laravel-user-management": "dev-updated_layout"
+        "mark-villudo/laravel-user-management": "dev-updated_layout",
         "spatie/laravel-query-builder": "1.12.0",
         "spatie/laravel-activitylog": "3.1.2",
         "spatie/laravel-http-logger": "1.1.3",
