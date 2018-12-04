@@ -4,7 +4,14 @@
     "description": "The Laravel Framework.",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "php",
+        "hr",
+        "payroll",
+        "ph",
+        "south east",
+        "time attendance",
+        "leave management"
     ],
     "license": "MIT",
     "require": {
