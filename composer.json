@@ -13,7 +13,9 @@
         "laravel/framework": "5.7.*",
         "laravel/telescope": "^1.0",
         "laravel/tinker": "^1.0",
-        "mark-villudo/admin-lte": "dev-master"
+        "mark-villudo/admin-lte": "dev-master",
+        "mark-villudo/laravel-user-management": "dev-updated_layout"
+
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

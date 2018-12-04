@@ -26,9 +26,11 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
+        <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+        </li>
+<!--         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <i class="fa fa-dashboard"></i> <span></span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -37,10 +39,10 @@
             <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
-        </li>
+        </li> -->
         <li class="header">User Management</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Users</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Roles</span></a></li>
+        <li><a href="{{ route('users.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Users</span></a></li>
+        <li><a href="{{ route('roles.index') }}"><i class="fa fa-circle-o text-yellow"></i> <span>Roles</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
