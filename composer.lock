@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "056ac46cd29ffe418d5d88fb3b9a3d82",
+    "content-hash": "7a72d61f062c5dcd728105f190b8b121",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -807,6 +807,45 @@
                 "storage"
             ],
             "time": "2018-11-23T23:41:29+00:00"
+        },
+        {
+            "name": "mark-villudo/admin-lte",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MarkVilludo/adminLte.git",
+                "reference": "16cb9ea6c0f516b9c1eb89da56f29d3736001ec7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MarkVilludo/adminLte/zipball/16cb9ea6c0f516b9c1eb89da56f29d3736001ec7",
+                "reference": "16cb9ea6c0f516b9c1eb89da56f29d3736001ec7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "MarkVilludo\\AdminLte\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Mark Villudo"
+                }
+            ],
+            "description": "Laravel package for Admin LTE",
+            "keywords": [
+                "Free admin-lte",
+                "admin",
+                "admin-lte",
+                "laravel",
+                "lte"
+            ],
+            "time": "2018-12-04T04:42:13+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4316,7 +4355,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "mark-villudo/admin-lte": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
