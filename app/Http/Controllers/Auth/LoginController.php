@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Session;
+use Auth;
+
 
 class LoginController extends Controller
 {
@@ -25,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/manager/dashboard';
 
     /**
      * Create a new controller instance.
@@ -35,5 +38,30 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login()
+    {
+        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+           $user = Auth::user();
+
+
+            if (auth()->user()->status) {
+                $data['message'] = 'Login successful';
+
+                if (Auth::user()->hasRole('Admin')) {
+                    return redirect()->route('login');
+                } 
+            } else {
+                $message = 'Account deactivated, Please contact system administrator.';
+                Session::flash('message', $message);
+                return redirect()->back();
+            }
+        } else {
+            // return 'test';
+            $message = 'Invalid credentials';
+            Session::flash('message', $message);
+            return redirect()->back();
+        }
     }
 }
