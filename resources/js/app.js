@@ -9,14 +9,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import router from './routes';
 
 import VueAxios from 'vue-axios';
 import axios from 'axios';
-
 Vue.use(VueAxios, axios);
+
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
+
 
 Vue.use(BootstrapVue);
 /**
@@ -27,10 +27,12 @@ Vue.use(BootstrapVue);
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
+import router from './routes';
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('topbar', require('./components/Topbar.vue'));
 Vue.component('sidebar', require('./components/Sidebar.vue'));
 Vue.component('app', require('./pages/App.vue'));
+
 
 const app = new Vue({
 	

@@ -12,11 +12,7 @@
         <div id="app">
           <topbar></topbar>
           <sidebar></sidebar>
-
-           
           <app></app>
- 
-
         </div>
         <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
     </body>

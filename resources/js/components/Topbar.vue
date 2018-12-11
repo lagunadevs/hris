@@ -40,7 +40,7 @@
 
     </b-collapse>
   </b-navbar>
-
+  
 </template>
 
 <script>
