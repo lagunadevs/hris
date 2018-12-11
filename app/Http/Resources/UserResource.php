@@ -21,7 +21,7 @@ class UserResource extends JsonResource
             'last_name' => $this->last_name,
             'email' => $this->email,
             'type' => $this->type, //nullable for special purposes.
-            'expiration_date' => date('M d, Y', strtotime($this->expiration_date)),
+            'expiration_date' => $this->expiration_date->format('M d, Y'),
             'email_verified_at' => $this->email_verified_at,
             'is_expire_access' => $this->is_expire_access,
             'created_at' => $this->created_at->format('M d, Y') .' / '.$this->created_at->format('h:i a'),

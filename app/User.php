@@ -16,6 +16,9 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
+    protected $casts = [
+        'expiration_date' => 'datetime',
+    ];
     /**
      * The attributes that are mass assignable.
      *
@@ -80,4 +83,5 @@ class User extends Authenticatable
             return false;
         }
     }
+
 }
