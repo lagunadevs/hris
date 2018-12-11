@@ -11,6 +11,8 @@
 |
 */
 
+//App::bind('App\Deductions\TaxInterface','App\Deductions\Malaysia');
+
 Route::get('/', function () {
     return view('welcome');
 });
