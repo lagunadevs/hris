@@ -8,7 +8,7 @@ Vue.use(Meta)
 const router = new VueRouter({
   routes: [
       {
-        path:'/',
+        path:'/home',
         name: 'home',
         component: require('./pages/Helloworld.vue')
       },

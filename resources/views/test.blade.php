@@ -13,16 +13,9 @@
           <topbar></topbar>
           <sidebar></sidebar>
 
-            <div class="content">
-              <b-button>I am a Button</b-button>
-              <b-button href="#">I am a Link</b-button>
-                <router-view></router-view>
-                <p>
-                    <router-link :to="{ name: 'about' }">about</router-link> |
-                    <router-link :to="{ name: 'home' }">Hello World</router-link>
-                </p>
-            </div>
-
+           
+          <app></app>
+ 
 
         </div>
         <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>

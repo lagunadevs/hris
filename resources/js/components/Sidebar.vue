@@ -13,10 +13,7 @@
 </template>
 
 <style>
-body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-}
+
 
 .sidebar {
   margin: 0;
