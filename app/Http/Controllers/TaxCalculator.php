@@ -23,7 +23,7 @@ class TaxCalculator extends Controller
             [
                 'salary' => $basicSalary,
                 'income_tax' => $tax,
-                'contributions' => 'test123'
+                'contributions' => null
             ], 200);
 
         return $tax;
