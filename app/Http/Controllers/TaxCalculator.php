@@ -30,12 +30,9 @@ class TaxCalculator extends Controller
 
             //less all contributions before calculate tax
             $salaryLessContributions = $basicSalary - ($sss + $pagibig + $philHealth);
-
             $tax = $this->taxInterface->taxPh($salaryLessContributions);
 
-
             //half salary 
-
             $salaryLessTaxContributions = $salaryLessContributions - $tax;
         }
 
