@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Deductions\Tax;
 use App\Deductions\TaxInterface;
+use App\Benefits\BenefitsInterface;
 
 class TaxCalculator extends Controller
 {
 
-    public function __construct(TaxInterface $taxInterface) {
+    public function __construct(TaxInterface $taxInterface, BenefitsInterface $benefitsInterface) {
         $this->taxInterface = $taxInterface;
+        $this->benefitsInterface = $benefitsInterface;
     }
     
     /**
@@ -23,13 +24,18 @@ class TaxCalculator extends Controller
         //get 
         if ($country = 'PH') {
             $tax = $this->taxInterface->taxPh($basicSalary);
+            $sss = $this->benefitsInterface->calculateSSS($basicSalary);
         }
 
         return response()->json(
             [
                 'salary' => $basicSalary,
                 'income_tax' => $tax,
-                'contributions' => null
+                'contributions' => [
+                    'sss' => $sss,
+                    // 'pagibig' => $sss,
+                    // 'philhealth' => $sss
+                ]
             ], 200);
 
     }

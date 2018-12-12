@@ -12,6 +12,8 @@ return [
     |
     */
 
-    'country' => env('TAXCOUNTRY',"\PH")
+    'country' => env('TAXCOUNTRY',"\PH"),
+
+    'sss' => '\SSS'
 
 ];
