@@ -23,19 +23,39 @@ class TaxCalculator extends Controller
     {
         //get 
         if ($country = 'PH') {
-            $tax = $this->taxInterface->taxPh($basicSalary);
+
             $sss = $this->benefitsInterface->calculateSSS($basicSalary);
+            $pagibig = $this->benefitsInterface->calculatePagibig($basicSalary);
+            $philHealth = $this->benefitsInterface->calculatePHilHealth($basicSalary);
+
+            //less all contributions before calculate tax
+            $salaryLessContributions = $basicSalary - ($sss + $pagibig + $philHealth);
+
+            $tax = $this->taxInterface->taxPh($salaryLessContributions);
+
+
+            //half salary 
+
+            $salaryLessTaxContributions = $salaryLessContributions - $tax;
         }
 
         return response()->json(
             [
                 'salary' => $basicSalary,
-                'income_tax' => $tax,
-                'contributions' => [
+                'salary_month' => number_format($salaryLessTaxContributions, 2),
+                'half_salary_month' => number_format($salaryLessTaxContributions / 2, 2),
+                'income_tax' => number_format($tax, 2),
+                'contributions_monthly' => [
                     'sss' => $sss,
-                    // 'pagibig' => $sss,
-                    // 'philhealth' => $sss
-                ]
+                    'pagibig' => $pagibig,
+                    'philhealth' => $philHealth,
+                ],
+                'contributions_half_month' => [
+                    'half_month_sss' => $sss / 2,
+                    'half_month_pagibig' => $pagibig / 2,
+                    'half_month_philhealth' => $philHealth / 2,
+                ],
+
             ], 200);
 
     }

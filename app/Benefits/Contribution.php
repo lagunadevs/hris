@@ -4,13 +4,13 @@ namespace App\Benefits;
 
 use Illuminate\Database\Eloquent\Model;
 	
-class SSS implements BenefitsInterface
+class Contribution implements BenefitsInterface
 {
  	// model property on class instances
     protected $basicSalary;
 
     /**
- 	* Calculate monthly tax
+ 	* Calculate monthly sss
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -87,7 +87,43 @@ class SSS implements BenefitsInterface
             $sssAmount = 581.30;
         } 
 
-        return number_format($sssAmount, 2);
+        return $sssAmount;
+    }
+
+    /**
+    * Calculate monthly pagibig
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+    */
+    public function calculatePagibig($basicSalary)
+    {       
+        $pagibigAmount = 0;
+
+        //monthly based salary
+        if ($basicSalary < 5000) {
+            $pagibigAmount = $basicSalary / 50;
+        } else {
+            $pagibigAmount = 100;
+        } 
+
+        return $pagibigAmount;
+    }
+
+    /**
+    * Calculate monthly pagibig
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+    */
+    public function calculatePHilHealth($basicSalary)
+    {       
+        $philHealthAmount = 0;
+
+        //monthly based salary
+        $philHealthAmount = (($basicSalary * 2.75) / 100) / 2;
+
+        return $philHealthAmount;
     }
 }
 

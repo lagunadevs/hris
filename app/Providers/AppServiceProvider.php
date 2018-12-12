@@ -15,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         App::bind('App\Deductions\TaxInterface','App\Deductions'.config('setting.country'));
-        App::bind('App\Benefits\BenefitsInterface','App\Benefits'.config('setting.sss'));
+        
+        App::bind('App\Benefits\BenefitsInterface','App\Benefits'.config('setting.contribution'));
     }
 
     /**

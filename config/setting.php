@@ -14,6 +14,6 @@ return [
 
     'country' => env('TAXCOUNTRY',"\PH"),
 
-    'sss' => '\SSS'
+    'contribution' => '\Contribution',
 
 ];

@@ -40,7 +40,7 @@ class PH implements TaxInterface
             $taxAmount = (($basicSalary - 666667) * 0.35) + 200833.33;
         }
 
-        return number_format($taxAmount, 2);
+        return $taxAmount;
     }
 }
 
