@@ -9,8 +9,10 @@ class Contribution implements BenefitsInterface
  	// model property on class instances
     protected $basicSalary;
 
+
     /**
- 	* Calculate monthly sss
+     * Reference https://www.moneymax.ph/blog/salary-deductions-philippines
+ 	 * Calculate monthly sss
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -118,10 +120,19 @@ class Contribution implements BenefitsInterface
     */
     public function calculatePHilHealth($basicSalary)
     {       
+
         $philHealthAmount = 0;
 
         //monthly based salary
-        $philHealthAmount = (($basicSalary * 2.75) / 100) / 2;
+        //divided by 2 because for the employer and employee shares
+
+        if ($basicSalary <= 10000) {
+            $philHealthAmount =  275 / 2;
+        } else if ($basicSalary <= 40000) {
+            $philHealthAmount = ($basicSalary * 0.0275) / 2;
+        } else if ($basicSalary > 40000) {
+            $philHealthAmount = 1100 / 2;
+        } 
 
         return $philHealthAmount;
     }
