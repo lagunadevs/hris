@@ -20,7 +20,6 @@ class TaxCalculator extends Controller
      */
     public function calculateTax($country, $basicSalary)
     {
-        
         //get 
         if ($country = 'PH') {
             $tax = $this->taxInterface->taxPh($basicSalary);
