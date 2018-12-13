@@ -51,6 +51,7 @@ Route::post('/companies', function(Request $request) {
 	$company->contact_person = request('name');
 	$company->company_email = request('company_email');
 	$company->phone_number = request('phone_number');
+	$company->company_type = false;
 	$company->name = request('company_name');
 	$company->address = request('company_address');
 	$company->save();
