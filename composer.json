@@ -24,6 +24,7 @@
     "require-dev": {
         "beyondcode/dusk-dashboard": "^1.0",
         "beyondcode/laravel-dump-server": "^1.0",
+        "beyondcode/laravel-query-detector": "^0.6.0",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
         "laravel/dusk": "^4.0",
