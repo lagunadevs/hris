@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 Route::get('test', function() {
@@ -23,5 +23,5 @@ Route::get('test', function() {
 });
 
 Route::get('/{vue_capture?}', function () {
-	return view('app.index');
+	return view('front_end.index');
 })->where('vue_capture', '[\/\w\.-]*');
