@@ -18,3 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('v1/calculate-tax/{country}/{basicSalary}', 'TaxCalculator@calculateTax')->name('api.calculate_tax');
+
+Route::get('v1/employees', 'Api\EmployeeController@index')->name('api.employees');
+Route::post('v1/employees', 'Api\EmployeeController@store')->name('api.employees');
+Route::post('v1/employees/{id}', 'Api\EmployeeController@store')->name('api.employees');
+Route::delete('v1/employees/{id}', 'Api\EmployeeController@store')->name('api.employees');
