@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('test', function() {
+
+	return view('test');
+
+});
+
+Route::get('/{vue_capture?}', function () {
+	return view('app.index');
+})->where('vue_capture', '[\/\w\.-]*');
