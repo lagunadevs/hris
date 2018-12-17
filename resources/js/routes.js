@@ -10,12 +10,17 @@ const router = new VueRouter({
       {
         path:'/',
         name: 'home',
-        component: require('./pages/Helloworld.vue')
+        component: require('./pages/Landing.vue')
       },
       {
         path:'/about',
         name: 'about',
         component: require('./pages/About.vue')
+      },
+      {
+        path:'/companies',
+        name: 'companies',
+        component: require('./pages/Companies.vue')
       }
   ],
   mode: process.env.MIX_BROWSER_MODE,

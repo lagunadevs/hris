@@ -9,16 +9,23 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import router from './routes';
 
 import VueAxios from 'vue-axios';
 import axios from 'axios';
-
 Vue.use(VueAxios, axios);
+
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
-
 Vue.use(BootstrapVue);
+
+import VueEloquent from 'vue-eloquent';
+Vue.use(VueEloquent);
+
+import VueSweetAlert from 'vue-sweetalert'
+Vue.use(VueSweetAlert)
+
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -27,9 +34,10 @@ Vue.use(BootstrapVue);
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('topbar', require('./components/Topbar.vue'));
-Vue.component('sidebar', require('./components/Sidebar.vue'));
+import router from './routes';
+import components from './components/components';
+
+
 
 const app = new Vue({
 	
