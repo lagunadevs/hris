@@ -6,14 +6,37 @@
 
 ## About HRIS
 
+Attendance monitoring, Leave administration, Personnel Management, Payroll, Recruitment, Performance Management and more..
+
+## Installation
 
 ## Contributing
+1. Fork it.
+2. Create a branch (`git checkout -b my_markup`)
+3. Commit your changes (`git commit -am "Added Snarkdown"`)
+4. Push to the branch (`git push origin my_markup`)
+5. Create an [Issue][1] with a link to your branch
+6. Enjoy a refreshing Diet Coke and wait
+
+https://docs.google.com/document/d/1EKI6tkr3-Yb6Yq47rFlU0LbZ47aNTH5vprqGF9UQ4kE/edit?usp=sharing
+
+| Branch        | Naming Convention           | Example  |
+| ------------- |:-------------:| -----:|
+| Feature      | feature/{feature-name} | feature/user-management |
+| Bug      | bugfix/{bug-name}      | bugfix/bug-error-add-user   |
+| Hot Fix | hotfix/{fix-name}   |  hotfix/fix-paypal-payment   |
+| Release      | release/{release-date-version} | release/2018-12-03-v-01 |
 
 ## Contributors
+- [Manny Isles](https://github.com/mannysoft)
 - [Mark Villudo](https://github.com/MarkVilludo)
 - [Paul Katipunan](https://github.com/paulkatipunan)
 
 ## Security Vulnerabilities
+
+## Tests
+We can run test using laravel dusk
+`php artisan dusk`
 
 ## License
 
