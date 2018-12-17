@@ -1,22 +1,14 @@
 <template>
     <div class="sidebar">
         
-    
-          <b-link href="#foo">Cras justo odio</b-link>
-          <b-link href="#foo">Dapibus ac facilisis in</b-link>
-          <b-link href="#foo">Morbi leo risus</b-link>
-          <b-link href="#foo">Porta ac consectetur ac</b-link>
-          <b-link href="#foo">Vestibulum at eros</b-link>
-   
-
+        <router-link :to="{name: 'home'}">Home</router-link>
+        <router-link :to="{name: 'about'}">About</router-link>
+        <router-link :to="{name: 'companies'}">Companies</router-link>
     </div>
 </template>
 
 <style>
-body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-}
+
 
 .sidebar {
   margin: 0;
