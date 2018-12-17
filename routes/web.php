@@ -16,11 +16,24 @@
 // });
 
 
-Route::get('test', function() {
 
-	return view('test');
+Route::get('/login', function () {
+    return view('login ');
+})->name('login');
 
+Route::post('/login', 'Auth\LoginController@login')->name('web.login');
+Route::get('/logout', function() {
+	auth()->logout();
+    return view('login ');
+})->name('web.logout');
+
+
+Route::middleware('auth')->group(function () {
+	Route::get('/admin/manager/dashboard', function () {
+	    return view('index');
+	});
 });
+
 
 Route::get('/{vue_capture?}', function () {
 	return view('front_end.index');
