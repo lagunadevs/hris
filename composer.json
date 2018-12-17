@@ -15,6 +15,7 @@
         "laravel/framework": "5.7.*",
         "laravel/telescope": "^1.0",
         "laravel/tinker": "^1.0",
+        "mark-villudo/activity-logs": "dev-master",
         "mark-villudo/admin-lte": "dev-master",
         "mark-villudo/laravel-user-management": "dev-updated_layout",
         "spatie/laravel-activitylog": "3.1.2",
@@ -23,6 +24,7 @@
         "spatie/laravel-tail": "3.2.3"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
         "beyondcode/dusk-dashboard": "^1.0",
         "beyondcode/laravel-dump-server": "^1.0",
         "beyondcode/laravel-query-detector": "^0.6.0",
