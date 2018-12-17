@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
 
 Route::get('/login', function () {
     return view('login ');
@@ -33,3 +35,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
+Route::get('/{vue_capture?}', function () {
+	return view('front_end.index');
+})->where('vue_capture', '[\/\w\.-]*');

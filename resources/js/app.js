@@ -9,6 +9,23 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
+import VueAxios from 'vue-axios';
+import axios from 'axios';
+Vue.use(VueAxios, axios);
+
+import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue);
+
+import VueEloquent from 'vue-eloquent';
+Vue.use(VueEloquent);
+
+import VueSweetAlert from 'vue-sweetalert'
+Vue.use(VueSweetAlert)
+
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -17,8 +34,17 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+import router from './routes';
+import components from './components/components';
 
+
+
+const app = new Vue({
+	
+    el: '#app',
+    router
+   
+});
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
@@ -28,6 +54,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app'
-});
+// const router = new VueRouter({ mode: 'history'});
+// const app = new Vue(Vue.util.extend({ router })).$mount('#app');

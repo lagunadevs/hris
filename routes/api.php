@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\Company;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,44 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::get('/companies', function() {
+
+	$companies = Company::all();
+
+	return response()->json($companies);
+
+});
+
+Route::delete('/companies/{id}', function($id) {
+
+	$companies = Company::find($id);
+
+	$companies->delete();
+
+	return response()->json($companies);
+
+});
+
+Route::get('/companies/{id}', function($id) {
+
+	$companies = Company::find($id);
+
+	return response()->json($companies);
+
+});
+
+Route::post('/companies', function(Request $request) {
+
+	$company = new Company;
+	$company->contact_person = request('name');
+	$company->company_email = request('company_email');
+	$company->phone_number = request('phone_number');
+	$company->company_type = false;
+	$company->name = request('company_name');
+	$company->address = request('company_address');
+	$company->save();
+	$data['company'] = $company;
+	$data['message'] = 'Success';
+	return response()->json($company, 200);
+
+});
