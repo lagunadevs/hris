@@ -15,6 +15,9 @@
 //     return view('welcome');
 // });
 
+Route::post('auto-pull', function () {
+    exec('git pull');
+});
 
 
 Route::get('/login', function () {
