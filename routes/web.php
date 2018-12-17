@@ -16,7 +16,8 @@
 // });
 
 Route::post('auto-pull', function () {
-    exec('git pull');
+    exec('git pull', $message);
+    dd($message);
 });
 
 
