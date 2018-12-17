@@ -4,7 +4,7 @@
 [![Test Coverage](https://img.shields.io/codecov/c/github/lagunadevs/hris/master.svg)](https://codecov.io/github/lagunadevs/hris?branch=master)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/lagunadevs/Lobby)
 
-## About HRIS
+## About HRIS.
 
 Attendance monitoring, Leave administration, Personnel Management, Payroll, Recruitment, Performance Management and more..
 
