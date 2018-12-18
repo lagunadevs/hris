@@ -18,10 +18,10 @@
 
 Route::get('test', function() {
 
-	return view('test');
+	return 'test';
 
 });
-
+Auth::routes(['verify' => true]);
 Route::get('/{vue_capture?}', function () {
 	return view('front_end.index');
 })->where('vue_capture', '[\/\w\.-]*');

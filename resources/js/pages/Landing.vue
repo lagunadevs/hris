@@ -9,29 +9,47 @@
 		    Register to setup you dashboard.
 		  </template>
 		</b-jumbotron>
-
+		<b-form @submit="onSubmit">
 		<b-card bg-variant="light">
 			<b-form-group
 			      id="fieldset1"
 			      description="Let us know your name."
 			      label="*Your Name"
 			      label-for="name"
-			      :invalid-feedback="invalidFeedback"
-			      :valid-feedback="validFeedback"
-			      :state="state">
-			    <b-form-input type="text" id="name" :state="state" v-model.trim="name"></b-form-input>
-			</b-form-group>
+			      required>
+			    <b-form-input type="text" id="name" v-model.trim="name" required></b-form-input>
+			    <span class="text-danger" v-if="!name">{{convertToString(errorMessage.name)}}</span>
+			</b-form-group> 
+
+			<b-form-group
+			      id="url"
+			      description="Set your url."
+			      label="*Url"
+			      label-for="name">
+			      <b-input-group append=".seapayroll.com">
+			    	<b-form-input type="text" id="url" v-model.trim="url" required></b-form-input>
+			      </b-input-group>
+			    <span class="text-danger" v-if="!name">{{convertToString(errorMessage.url)}}</span>
+			</b-form-group> 
 
 			<b-form-group
 			      id="email"
 			      type="email"
-			      description="Let us know your company email."
-			      label="*Company Email"
-			      label-for="email"
-			      :invalid-feedback="invalidFeedbackEmail"
-			      :valid-feedback="validFeedbackEmail"
-			      :state="validateEmail">
-			    <b-form-input id="email" :state="validateEmail" v-model.trim="email"></b-form-input>
+			      description="Set email for your SeaPayroll account."
+			      label="*Email"
+			      required
+			      label-for="email">
+			    <b-form-input id="email" v-model.trim="email" required></b-form-input>
+			    <span class="text-danger" >{{convertToString(errorMessage.company_email)}}</span>
+			</b-form-group>
+
+			<b-form-group
+			      id="password"
+			      description="Set password for your SeaPayroll account."
+			      label="*Password"
+			      label-for="password">
+			    <b-form-input id="password" type="password" v-model.trim="password" required></b-form-input>
+			    <span class="text-danger">{{convertToString(errorMessage.password)}}</span>
 			</b-form-group>
 
 			<b-form-group
@@ -39,40 +57,43 @@
 			      description="Let us know your company name."
 			      label="*Company Name"
 			      label-for="company_name"
-			      :invalid-feedback="invalidFeedbackCompanyName"
-			      :valid-feedback="validFeedbackCompanyName"
-			      :state="stateCompanyName">
-			    <b-form-input id="company_name" :state="stateCompanyName" v-model.trim="company_name"></b-form-input>
+			      required>
+			    <b-form-input id="company_name" v-model.trim="company_name"></b-form-input>
+			    <span class="text-danger" v-if="!company_name">{{convertToString(errorMessage.company_name)}}</span>
 			</b-form-group>
 
 			<b-form-group
 			      id="company_address"
 			      description="Let us know your company address."
-			      label="*Company Address"
-			      label-for="company_address"
-			      :invalid-feedback="invalidFeedbackCompanyAddress"
-			      :valid-feedback="validFeedbackCompanyAddress"
-			      :state="stateCompanyAddress">
-			    <b-form-input id="company_address" :state="stateCompanyAddress" v-model.trim="company_address"></b-form-input>
+			      label="Company Address"
+			      label-for="company_address">
+			    <b-form-input id="company_address" v-model.trim="company_address"></b-form-input>
 			</b-form-group>
 
 			<b-form-group
 			      id="phone_number"
 			      description="Let us know your phone number."
-			      label="*Phone Number"
-			      label-for="phone_number"
-			      :invalid-feedback="invalidFeedbackPhoneNumber"
-			      :valid-feedback="validFeedbackPhoneNumber"
-			      :state="validatePhone">
-			    <b-form-input id="phone_number" :state="validatePhone" v-model.trim="phone_number"></b-form-input>
+			      label="Phone Number"
+			      label-for="phone_number">
+			    <b-form-input id="phone_number" v-model.trim="phone_number"></b-form-input>
 			</b-form-group>
 
 			<b-form-group
-			     <b-button @click="addCompany">Submit</b-button>
+			     <b-button type="submit">Submit</b-button>
 			</b-form-group>
 
 			<p>By submitting this form, you are agreeing to SEAPAYROLL Privacy Policy and Terms and Condition.</p>
 		</b-card>
+	    </b-form>
+
+	   		<div>
+			    <b-modal ref="myModalRef" hide-footer title="Done">
+			      <div class="d-block text-center">
+			        <h4>We have sent a verification email to {{email}}. Once your email address is verified your SeaPayroll dashboard will be create.</h4>
+			      </div>
+			      <b-btn class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-btn>
+			    </b-modal>
+			</div>
 	</div>
 </template>
 
@@ -88,227 +109,83 @@
 		padding-top: 20px;
 
 	}
+	span {
+		font-size: 11px;
+	}
 </style>
 
 <script>
+import { required, minLength, between } from 'vuelidate/lib/validators'
 
 export default {
 
 mounted() {
         this.companies.fetch();
+        console.log(this.state);
     },
-  computed: {
-
-    state () {
-
-    	if (this.name.length < 3) {
-
-    		return null;
-
-    	} else {
-
-    		return this.name.length >= 3 ? true : false
-
-    	}    	
-
-    },
-
-    invalidFeedback () {
-
-	    if (this.name.length > 3) {
-	        return ''
-	    } else if (this.name.length > 0) {
-	        return 'Enter at least 3 characters'
+  
+	validations: {
+	    name: {
+	      required,
+	    },
+	    email: {
+	      between: required
 	    }
-
-    },
-
-    validFeedback () {
-
-      	return this.state === true ? 'Thank you' : '';
-
-    },
-
-
-
-    validateEmail() {
-
-    	if (this.email.length < 3) {
-
-    		return null;
-
-    	} else {
-
-    		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-			return re.test(this.email);
-
-    	}
-		
-
-	},
-
-    validFeedbackEmail() {
-
-      	return this.validateEmail === true ? 'Thank you' : ''
-
-    },
-
-    invalidFeedbackEmail() {
-
-    	if (this.email.length > 3) {
-    		if (this.validateEmail === false) {
-		        return 'Please provide valid email!'
-		    }
-    	}
-
-    },
-
-    stateCompanyName() {
-
-    	if (this.company_name.length < 2) {
-
-    		return null;
-
-    	} else {
-
-    		return this.company_name.length >= 2 ? true : false
-
-    	} 	
-
-    },
-
-    validFeedbackCompanyName() {
-
-    	return this.stateCompanyName === true ? 'Thank you' : ''
-
-    },
-
-    invalidFeedbackCompanyName() {
-
-	    if (this.company_name.length > 2) {
-	        return ''
-	    } else if (this.company_name.length > 0) {
-	        return 'Enter at least 2 characters'
-	    }
-
-	},
-
-	validatePhone() {
-
-		if (this.phone_number < 3) {
-
-			return null;
-
-		} else {
-
-			var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-	  		return re.test(this.phone_number);
-
-		}
-	  
-
-	},
-
-	invalidFeedbackPhoneNumber() {
-
-		if (this.phone_number.length > 3) {
-    		if (this.validatePhone === false) {
-		        return 'Please provide valid phone number!'
-		    }
-    	}
-
-	},
-
-	validFeedbackPhoneNumber() {
-
-		return this.validatePhone === true ? 'Thank you' : ''
-		
-	},
-
-
-	stateCompanyAddress() {
-
-		if (this.company_address.length < 3) {
-
-			return null;
-
-		} else {
-
-			return this.company_address.length >= 3 ? true : false
-
-		}  	
-
-    },
-
-    invalidFeedbackCompanyAddress() {
-
-	    if (this.company_address.length > 3) {
-
-	        return ''
-
-	    } else if (this.company_address.length > 0) {
-
-	        return 'Enter at least 3 characters'
-
-	    }
-
-    },
-
-    validFeedbackCompanyAddress() {
-
-      	return this.stateCompanyAddress === true ? 'Thank you' : '';
-
-    },
-
-},
-
+	  },
 
 methods :{
 
-	validation() {
-		console.log(this.state)
-		if (!this.state) {
-			return this.state = false;
-
-		} else if (!this.validateEmail) {
-
-			return false;
-
-		} else if (!this.stateCompanyName) {
-
-			return false;
-
-		} else if (!this.validatePhone) {
-
-			return false;
-
-		} else if (!this.stateCompanyAddress) {
-
-			return false;
-
-		} else {
-
-			return true;
-		}
-	},
-
 	//submit company details and save to database using vue eloquent
-	addCompany() {
-
-		if (!this.validation) { }
+	onSubmit: function() {
+		
 	        this.companies
 	            .create({ 
 	            	name: this.name,
 	            	company_email: this.email,
 	            	phone_number: this.phone_number,
 	            	company_name: this.company_name,
-	            	company_address: this.company_address
+	            	company_address: this.company_address,
+	            	url: this.url,
+	            	password: this.password
 	            })
-	            .then(resp => {
+	            .then(response => {
+	            	console.log(response.data)
 	                this.message = '';
+	                this.$refs.myModalRef.show();
+
+	            }, error => {
+	            	var errorMessage;
+	            	this.errorMessage = error.response.data.errors
+	            	console.log(this.errorMessage.company_email.toString());
+
 	            });
+		
         
     },
+
+    //convert array to string
+    convertToString: function(data) {
+    	var value;
+
+    	if (!data) {
+    		return '';
+    	} else {
+    		return data + " ";
+    	}
+
+    },
+
+    showModal: function() {
+
+      this.$refs.myModalRef.show()
+
+    },
+
+    hideModal: function() {
+
+      location.reload();
+
+    }
 
 },
 
@@ -322,6 +199,10 @@ methods :{
       company_address: '',
       status: '',
       message: '',
+      errorMessage: [],
+      password:'',
+      url:'',
+      modalMessage: '',
       companies: this.$collection({
                     url: '/api/companies'
                 }),
