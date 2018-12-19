@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Company;
+use Carbon\Carbon;
 use App\User;
 
 class CompanyController extends Controller
@@ -76,7 +77,7 @@ class CompanyController extends Controller
 
         $email = $user->email;
 
-        $url = url('test',$user->id);
+        $url = url('api/companies',$user->id);
 
         Mail::send(('emails.verify'), ['user' => $user, 'url' => $url], function ($message) use ($email) {
            $message->to($email);
@@ -86,12 +87,46 @@ class CompanyController extends Controller
 
     }
 
-    public function edit()
-    {
+    public function edit($id)
+    {	
 
-    	$companies = Company::all();
+    	$user = User::find($id);
 
-		return response()->json($companies);  	
+    	if (!$user) {
+            
+            return response()->json([
+                'message' => 'This verification Link is expired.'
+            ], 404);
+
+        }
+
+        if ($user->email_verified_at) {
+            
+            return response()->json([
+                'message' => 'You are already verified, Please Login to to your dashboard.'
+            ], 404);
+
+        }
+
+    	if (Carbon::parse($user->created_at)->addMinutes(2)->isPast()) {
+            
+            $user->company()->delete();
+
+            $user->delete();
+
+            return response()->json([
+                'message' => 'This verification Link is expired.'
+            ], 404);
+
+        } else {
+
+        	$user->email_verified_at = Carbon::now();
+
+    		$user->update();
+
+        }
+
+		return response()->json($user);  	
 
     }
 

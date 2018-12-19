@@ -1,5 +1,6 @@
 <template>
 	<div class="container">
+		<loader v-show="loaded" theme="dark" text="Loading News"></loader>
 
 		<b-jumbotron bg-variant="info" text-variant="white" border-variant="dark">
 		  <template slot="header">
@@ -9,7 +10,7 @@
 		    Register to setup you dashboard.
 		  </template>
 		</b-jumbotron>
-		<b-form @submit="onSubmit">
+		
 		<b-card bg-variant="light">
 			<b-form-group
 			      id="fieldset1"
@@ -79,12 +80,12 @@
 			</b-form-group>
 
 			<b-form-group
-			     <b-button type="submit">Submit</b-button>
+			     <b-button @click="onSubmit">Submit</b-button>
 			</b-form-group>
 
 			<p>By submitting this form, you are agreeing to SEAPAYROLL Privacy Policy and Terms and Condition.</p>
 		</b-card>
-	    </b-form>
+
 
 	   		<div>
 			    <b-modal ref="myModalRef" hide-footer title="Done">
@@ -137,7 +138,8 @@ methods :{
 
 	//submit company details and save to database using vue eloquent
 	onSubmit: function() {
-		
+			
+			this.loaded = true;
 	        this.companies
 	            .create({ 
 	            	name: this.name,
@@ -152,12 +154,12 @@ methods :{
 	            	console.log(response.data)
 	                this.message = '';
 	                this.$refs.myModalRef.show();
-
+	                this.loaded = false;
 	            }, error => {
 	            	var errorMessage;
 	            	this.errorMessage = error.response.data.errors
 	            	console.log(this.errorMessage.company_email.toString());
-
+	            	this.loaded = false;
 	            });
 		
         
@@ -202,6 +204,7 @@ methods :{
       errorMessage: [],
       password:'',
       url:'',
+      loaded: false,
       modalMessage: '',
       companies: this.$collection({
                     url: '/api/companies'

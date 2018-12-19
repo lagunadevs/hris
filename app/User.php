@@ -80,4 +80,11 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
         }
     }
+
+    public function company()
+    {
+
+        return $this->hasOne('App\Models\Company', 'company_id');
+
+    }
 }
