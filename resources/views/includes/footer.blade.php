@@ -1,5 +1,5 @@
  <!-- /.content-wrapper -->
-  <footer class="main-footer">
+  <footer class="main-footer pt-4" >
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
@@ -12,8 +12,6 @@
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
 
 <!-- jQuery 3 -->
 <script src="{{asset('../bower_components/jquery/dist/jquery.min.js')}}"></script>

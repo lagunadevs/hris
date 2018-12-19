@@ -43,7 +43,12 @@
         <li class="header">User Management</li>
         <li><a href="{{ route('users.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Users</span></a></li>
         <li><a href="{{ route('roles.index') }}"><i class="fa fa-circle-o text-yellow"></i> <span>Roles</span></a></li>
+
+        <li class="header">Administrator</li>
+        <li><a href="{{ route('employees.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Employees</span></a></li>
       </ul>
+
+
     </section>
     <!-- /.sidebar -->
   </aside>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\EmployeeResource;
 use App\Http\Resources\UserResource;
 use App\User;
 
@@ -24,7 +25,7 @@ class EmployeeController extends Controller
         $employees = $this->employee->where('type', 'employee')->get();
         
         if ($employees) {
-            return $data = UserResource::collection($employees);
+            return $data = EmployeeResource::collection($employees);
         } else {
             $data['message'] = 'No Records found.';
             return response()->json($data);

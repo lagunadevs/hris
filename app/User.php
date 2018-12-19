@@ -16,9 +16,8 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
-    protected $casts = [
-        'expiration_date' => 'datetime',
-    ];
+
+    protected $dates = ['expiration_date'];
     /**
      * The attributes that are mass assignable.
      *

@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('gender', 32);
             $table->enum('type', ['employee','admin']); //special purpose initial access
             $table->date('birthdate')->nullable();
-            $table->enum('immigration_status_id', ['Citizen',
+            $table->enum('immigration_status', ['Citizen',
                                                    'Permanent Resident',
                                                    'Work Permit Holder',
                                                    'Dependant Pass Holder'])->nullable();
@@ -58,6 +58,7 @@ class CreateUsersTable extends Migration
             $table->integer('first_level_approver')->nullable();
             $table->integer('seond_level_approver')->nullable();
             $table->integer('third_level_approver')->nullable();
+            $table->date('join_date')->nullable();
 
 
             $table->integer('sss_number')->nullable();

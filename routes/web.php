@@ -34,4 +34,4 @@ Route::middleware('auth')->group(function () {
 	});
 });
 
-
+Route::resource('/employees', 'Admin\EmployeeController');
