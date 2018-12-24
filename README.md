@@ -27,6 +27,8 @@ https://docs.google.com/document/d/1EKI6tkr3-Yb6Yq47rFlU0LbZ47aNTH5vprqGF9UQ4kE/
 | Hot Fix | hotfix/{fix-name}   |  hotfix/fix-paypal-payment   |
 | Release      | release/{release-date-version} | release/2018-12-03-v-01 |
 
+https://github.com/kamranahmedse/design-patterns-for-humans
+
 ## Contributors
 - [Manny Isles](https://github.com/mannysoft)
 - [Mark Villudo](https://github.com/MarkVilludo)
