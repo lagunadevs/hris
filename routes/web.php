@@ -24,6 +24,7 @@ Route::get('/login', function () {
     return view('login ');
 })->name('login');
 
+
 Route::post('/login', 'Auth\LoginController@login')->name('web.login');
 Route::get('/logout', function() {
 	auth()->logout();
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
 	});
 });
 
+Auth::routes(['verify' => true]);
 
 Route::get('/{vue_capture?}', function () {
 	return view('front_end.index');

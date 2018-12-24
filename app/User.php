@@ -11,7 +11,7 @@ use MarkVilludo\Permission\Models\RoleHasPermission;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use HasRoles;
@@ -79,5 +79,12 @@ class User extends Authenticatable
         } else {
             return false;
         }
+    }
+
+    public function company()
+    {
+
+        return $this->hasOne('App\Models\Company', 'company_id');
+
     }
 }
