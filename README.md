@@ -34,6 +34,10 @@ https://docs.google.com/document/d/1EKI6tkr3-Yb6Yq47rFlU0LbZ47aNTH5vprqGF9UQ4kE/
 
 ## Security Vulnerabilities
 
+## Tests
+We can run test using laravel dusk
+`php artisan dusk`
+
 ## License
 
 HRIS is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
