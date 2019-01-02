@@ -66,5 +66,7 @@ Route::group(['prefix' => 'companies'], function() {
 	Route::post('/', 'Api\CompanyController@store');
 	Route::get('/{id}', 'Api\CompanyController@edit');
 	Route::delete('/{id}', 'Api\CompanyController@delete');
-
+	Route::get('/user/{id}', 'Api\CompanyController@verify');
 });
+
+

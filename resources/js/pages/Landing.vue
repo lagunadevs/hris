@@ -1,13 +1,13 @@
 <template>
 	<div class="container">
-		<loader v-show="loaded" theme="dark" text="Loading News"></loader>
+		<loader v-show="loaded" theme="dark" text="Loading"></loader>
 
 		<b-jumbotron bg-variant="info" text-variant="white" border-variant="dark">
 		  <template slot="header">
 		    Lorem Ipsum
 		  </template>
 		  <template slot="lead">
-		    Register to setup you dashboard.
+		    Register to setup your dashboard.
 		  </template>
 		</b-jumbotron>
 		
@@ -80,7 +80,7 @@
 			</b-form-group>
 
 			<b-form-group
-			     <b-button @click="onSubmit">Submit</b-button>
+			     <b-button @click="onSubmit" :disabled="status">Submit</b-button>
 			</b-form-group>
 
 			<p>By submitting this form, you are agreeing to SEAPAYROLL Privacy Policy and Terms and Condition.</p>
@@ -140,6 +140,8 @@ methods :{
 	onSubmit: function() {
 			
 			this.loaded = true;
+			this.status = true;
+
 	        this.companies
 	            .create({ 
 	            	name: this.name,
@@ -155,11 +157,13 @@ methods :{
 	                this.message = '';
 	                this.$refs.myModalRef.show();
 	                this.loaded = false;
+	                this.status = false;
 	            }, error => {
 	            	var errorMessage;
 	            	this.errorMessage = error.response.data.errors
 	            	console.log(this.errorMessage.company_email.toString());
 	            	this.loaded = false;
+	            	this.status = false;
 	            });
 		
         
@@ -187,7 +191,7 @@ methods :{
 
       location.reload();
 
-    }
+    },
 
 },
 
@@ -197,9 +201,10 @@ methods :{
       name: '',
       email: '',
       company_name: '',
+      company_email: '',
       phone_number: '',
       company_address: '',
-      status: '',
+      status: false,
       message: '',
       errorMessage: [],
       password:'',

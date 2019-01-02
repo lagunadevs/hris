@@ -65898,7 +65898,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     name: 'companies',
     component: __webpack_require__(259)
   }],
-  mode: "hash"
+  mode: Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).MIX_BROWSER_MODE
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
@@ -69921,6 +69921,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -69946,6 +69947,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     onSubmit: function onSubmit() {
       var _this = this;
 
+      this.loaded = true;
+      this.status = true;
+
       this.companies.create({
         name: this.name,
         company_email: this.email,
@@ -69958,10 +69962,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(response.data);
         _this.message = '';
         _this.$refs.myModalRef.show();
+        _this.loaded = false;
+        _this.status = false;
       }, function (error) {
         var errorMessage;
         _this.errorMessage = error.response.data.errors;
         console.log(_this.errorMessage.company_email.toString());
+        _this.loaded = false;
+        _this.status = false;
       });
     },
 
@@ -69993,13 +70001,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       name: '',
       email: '',
       company_name: '',
+      company_email: '',
       phone_number: '',
       company_address: '',
-      status: '',
+      status: false,
       message: '',
       errorMessage: [],
       password: '',
       url: '',
+      loaded: false,
       modalMessage: '',
       companies: this.$collection({
         url: '/api/companies'
@@ -70225,7 +70235,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var withParams = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","MIX_BROWSER_MODE":"hash","NODE_ENV":"development"}).BUILD === 'web' ? __webpack_require__(235).withParams : __webpack_require__(78).withParams;
+var withParams = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BUILD === 'web' ? __webpack_require__(235).withParams : __webpack_require__(78).withParams;
 var _default = withParams;
 exports.default = _default;
 
@@ -70784,6 +70794,18 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
+      _c("loader", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.loaded,
+            expression: "loaded"
+          }
+        ],
+        attrs: { theme: "dark", text: "Loading" }
+      }),
+      _vm._v(" "),
       _c(
         "b-jumbotron",
         {
@@ -70799,260 +70821,246 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("template", { slot: "lead" }, [
-            _vm._v("\n\t    Register to setup you dashboard.\n\t  ")
+            _vm._v("\n\t    Register to setup your dashboard.\n\t  ")
           ])
         ],
         2
       ),
       _vm._v(" "),
       _c(
-        "b-form",
-        { on: { submit: _vm.onSubmit } },
+        "b-card",
+        { attrs: { "bg-variant": "light" } },
         [
           _c(
-            "b-card",
-            { attrs: { "bg-variant": "light" } },
+            "b-form-group",
+            {
+              attrs: {
+                id: "fieldset1",
+                description: "Let us know your name.",
+                label: "*Your Name",
+                "label-for": "name",
+                required: ""
+              }
+            },
+            [
+              _c("b-form-input", {
+                attrs: { type: "text", id: "name", required: "" },
+                model: {
+                  value: _vm.name,
+                  callback: function($$v) {
+                    _vm.name = typeof $$v === "string" ? $$v.trim() : $$v
+                  },
+                  expression: "name"
+                }
+              }),
+              _vm._v(" "),
+              !_vm.name
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.convertToString(_vm.errorMessage.name)))
+                  ])
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: {
+                id: "url",
+                description: "Set your url.",
+                label: "*Url",
+                "label-for": "name"
+              }
+            },
             [
               _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "fieldset1",
-                    description: "Let us know your name.",
-                    label: "*Your Name",
-                    "label-for": "name",
-                    required: ""
-                  }
-                },
+                "b-input-group",
+                { attrs: { append: ".seapayroll.com" } },
                 [
                   _c("b-form-input", {
-                    attrs: { type: "text", id: "name", required: "" },
+                    attrs: { type: "text", id: "url", required: "" },
                     model: {
-                      value: _vm.name,
+                      value: _vm.url,
                       callback: function($$v) {
-                        _vm.name = typeof $$v === "string" ? $$v.trim() : $$v
+                        _vm.url = typeof $$v === "string" ? $$v.trim() : $$v
                       },
-                      expression: "name"
-                    }
-                  }),
-                  _vm._v(" "),
-                  !_vm.name
-                    ? _c("span", { staticClass: "text-danger" }, [
-                        _vm._v(
-                          _vm._s(_vm.convertToString(_vm.errorMessage.name))
-                        )
-                      ])
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "url",
-                    description: "Set your url.",
-                    label: "*Url",
-                    "label-for": "name"
-                  }
-                },
-                [
-                  _c(
-                    "b-input-group",
-                    { attrs: { append: ".seapayroll.com" } },
-                    [
-                      _c("b-form-input", {
-                        attrs: { type: "text", id: "url", required: "" },
-                        model: {
-                          value: _vm.url,
-                          callback: function($$v) {
-                            _vm.url = typeof $$v === "string" ? $$v.trim() : $$v
-                          },
-                          expression: "url"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  !_vm.name
-                    ? _c("span", { staticClass: "text-danger" }, [
-                        _vm._v(
-                          _vm._s(_vm.convertToString(_vm.errorMessage.url))
-                        )
-                      ])
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "email",
-                    type: "email",
-                    description: "Set email for your SeaPayroll account.",
-                    label: "*Email",
-                    required: "",
-                    "label-for": "email"
-                  }
-                },
-                [
-                  _c("b-form-input", {
-                    attrs: { id: "email", required: "" },
-                    model: {
-                      value: _vm.email,
-                      callback: function($$v) {
-                        _vm.email = typeof $$v === "string" ? $$v.trim() : $$v
-                      },
-                      expression: "email"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(
-                      _vm._s(
-                        _vm.convertToString(_vm.errorMessage.company_email)
-                      )
-                    )
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "password",
-                    description: "Set password for your SeaPayroll account.",
-                    label: "*Password",
-                    "label-for": "password"
-                  }
-                },
-                [
-                  _c("b-form-input", {
-                    attrs: { id: "password", type: "password", required: "" },
-                    model: {
-                      value: _vm.password,
-                      callback: function($$v) {
-                        _vm.password =
-                          typeof $$v === "string" ? $$v.trim() : $$v
-                      },
-                      expression: "password"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "text-danger" }, [
-                    _vm._v(
-                      _vm._s(_vm.convertToString(_vm.errorMessage.password))
-                    )
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "company_name",
-                    description: "Let us know your company name.",
-                    label: "*Company Name",
-                    "label-for": "company_name",
-                    required: ""
-                  }
-                },
-                [
-                  _c("b-form-input", {
-                    attrs: { id: "company_name" },
-                    model: {
-                      value: _vm.company_name,
-                      callback: function($$v) {
-                        _vm.company_name =
-                          typeof $$v === "string" ? $$v.trim() : $$v
-                      },
-                      expression: "company_name"
-                    }
-                  }),
-                  _vm._v(" "),
-                  !_vm.company_name
-                    ? _c("span", { staticClass: "text-danger" }, [
-                        _vm._v(
-                          _vm._s(
-                            _vm.convertToString(_vm.errorMessage.company_name)
-                          )
-                        )
-                      ])
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "company_address",
-                    description: "Let us know your company address.",
-                    label: "Company Address",
-                    "label-for": "company_address"
-                  }
-                },
-                [
-                  _c("b-form-input", {
-                    attrs: { id: "company_address" },
-                    model: {
-                      value: _vm.company_address,
-                      callback: function($$v) {
-                        _vm.company_address =
-                          typeof $$v === "string" ? $$v.trim() : $$v
-                      },
-                      expression: "company_address"
+                      expression: "url"
                     }
                   })
                 ],
                 1
               ),
               _vm._v(" "),
-              _c(
-                "b-form-group",
-                {
-                  attrs: {
-                    id: "phone_number",
-                    description: "Let us know your phone number.",
-                    label: "Phone Number",
-                    "label-for": "phone_number"
-                  }
-                },
-                [
-                  _c("b-form-input", {
-                    attrs: { id: "phone_number" },
-                    model: {
-                      value: _vm.phone_number,
-                      callback: function($$v) {
-                        _vm.phone_number =
-                          typeof $$v === "string" ? $$v.trim() : $$v
-                      },
-                      expression: "phone_number"
-                    }
-                  })
-                ],
-                1
-              ),
+              !_vm.name
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.convertToString(_vm.errorMessage.url)))
+                  ])
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: {
+                id: "email",
+                type: "email",
+                description: "Set email for your SeaPayroll account.",
+                label: "*Email",
+                required: "",
+                "label-for": "email"
+              }
+            },
+            [
+              _c("b-form-input", {
+                attrs: { id: "email", required: "" },
+                model: {
+                  value: _vm.email,
+                  callback: function($$v) {
+                    _vm.email = typeof $$v === "string" ? $$v.trim() : $$v
+                  },
+                  expression: "email"
+                }
+              }),
               _vm._v(" "),
-              _c("b-button", { attrs: { type: "submit" } }, [_vm._v("Submit")]),
-              _vm._v(" "),
-              _c("p", [
+              _c("span", { staticClass: "text-danger" }, [
                 _vm._v(
-                  "By submitting this form, you are agreeing to SEAPAYROLL Privacy Policy and Terms and Condition."
+                  _vm._s(_vm.convertToString(_vm.errorMessage.company_email))
                 )
               ])
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: {
+                id: "password",
+                description: "Set password for your SeaPayroll account.",
+                label: "*Password",
+                "label-for": "password"
+              }
+            },
+            [
+              _c("b-form-input", {
+                attrs: { id: "password", type: "password", required: "" },
+                model: {
+                  value: _vm.password,
+                  callback: function($$v) {
+                    _vm.password = typeof $$v === "string" ? $$v.trim() : $$v
+                  },
+                  expression: "password"
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.convertToString(_vm.errorMessage.password)))
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: {
+                id: "company_name",
+                description: "Let us know your company name.",
+                label: "*Company Name",
+                "label-for": "company_name",
+                required: ""
+              }
+            },
+            [
+              _c("b-form-input", {
+                attrs: { id: "company_name" },
+                model: {
+                  value: _vm.company_name,
+                  callback: function($$v) {
+                    _vm.company_name =
+                      typeof $$v === "string" ? $$v.trim() : $$v
+                  },
+                  expression: "company_name"
+                }
+              }),
+              _vm._v(" "),
+              !_vm.company_name
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(
+                      _vm._s(_vm.convertToString(_vm.errorMessage.company_name))
+                    )
+                  ])
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: {
+                id: "company_address",
+                description: "Let us know your company address.",
+                label: "Company Address",
+                "label-for": "company_address"
+              }
+            },
+            [
+              _c("b-form-input", {
+                attrs: { id: "company_address" },
+                model: {
+                  value: _vm.company_address,
+                  callback: function($$v) {
+                    _vm.company_address =
+                      typeof $$v === "string" ? $$v.trim() : $$v
+                  },
+                  expression: "company_address"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-form-group",
+            {
+              attrs: {
+                id: "phone_number",
+                description: "Let us know your phone number.",
+                label: "Phone Number",
+                "label-for": "phone_number"
+              }
+            },
+            [
+              _c("b-form-input", {
+                attrs: { id: "phone_number" },
+                model: {
+                  value: _vm.phone_number,
+                  callback: function($$v) {
+                    _vm.phone_number =
+                      typeof $$v === "string" ? $$v.trim() : $$v
+                  },
+                  expression: "phone_number"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-button",
+            { attrs: { disabled: _vm.status }, on: { click: _vm.onSubmit } },
+            [_vm._v("Submit")]
+          ),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "By submitting this form, you are agreeing to SEAPAYROLL Privacy Policy and Terms and Condition."
+            )
+          ])
         ],
         1
       ),
@@ -71419,6 +71427,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('topbar', __webpack_requir
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('sidebar', __webpack_require__(271));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('app', __webpack_require__(275));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('modal', __webpack_require__(278));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('loader', __webpack_require__(283));
 
 /***/ }),
 /* 263 */
@@ -72091,6 +72100,181 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 282 */,
+/* 283 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(286)
+}
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(284)
+/* template */
+var __vue_template__ = __webpack_require__(285)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Loader.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e79ec684", Component.options)
+  } else {
+    hotAPI.reload("data-v-e79ec684", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 284 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['text', 'theme', 'on'],
+
+    data: function data() {
+        return {
+            rootUrl: window.location.origin
+        };
+    }
+});
+
+/***/ }),
+/* 285 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "loader-wrapper centered" }, [
+    _c(
+      "div",
+      {
+        staticClass: "loader",
+        attrs: { "data-theme": _vm.theme, "data-placed-on": _vm.on }
+      },
+      [
+        _c("div", { staticClass: "loader__elements" }, [
+          _c("img", {
+            attrs: { src: _vm.rootUrl + "/images/lg.dual-ring-loader.gif" }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "mt-2" }, [_vm._v(_vm._s(_vm.text) + "...")])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e79ec684", module.exports)
+  }
+}
+
+/***/ }),
+/* 286 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(287);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(39)("41284b09", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e79ec684\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loader.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-e79ec684\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Loader.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 287 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(14)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.centered {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  -webkit-transform: -webkit-translate(-50%, -50%);\n          transform: -webkit-translate(-50%, -50%);\n  transform: -moz-translate(-50%, -50%);\n  transform: -ms-translate(-50%, -50%);\n  color: white;\n  font-size: 60px;\n  z-index: 1;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
