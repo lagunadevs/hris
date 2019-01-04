@@ -9,7 +9,7 @@ const router = new VueRouter({
   routes: [
       {
         path:'/',
-        name: 'home',
+        name: 'register',
         component: require('./pages/Landing.vue')
       },
       {
@@ -21,6 +21,16 @@ const router = new VueRouter({
         path:'/companies',
         name: 'companies',
         component: require('./pages/Companies.vue')
+      },
+      {
+        path:'/dashboard',
+        name: 'dashboard',
+        component: require('./pages/Dashboard.vue')
+      },
+      {
+        path:'/employees',
+        name: 'employees',
+        component: require('./pages/employees/index.vue')
       }
   ],
   mode: process.env.MIX_BROWSER_MODE,

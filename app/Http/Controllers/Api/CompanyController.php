@@ -106,7 +106,7 @@ class CompanyController extends Controller
         if ($user->email_verified_at) {
             
             return response()->json([
-                'message' => 'You are already verified, Please Login to to your dashboard.'
+                'message' => 'This verification Link is expired.'
             ], 404);
 
         }
