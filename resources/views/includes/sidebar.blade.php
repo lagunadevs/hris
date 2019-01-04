@@ -1,49 +1,63 @@
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="{{asset('../dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">HRIS</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <div class="info">
+          <a href="#" class="d-block">Alexander Pierce</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-        </li>
-<!--         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span></span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
-        </li> -->
-        <li class="header">User Management</li>
-        <li><a href="{{ route('users.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Users</span></a></li>
-        <li><a href="{{ route('roles.index') }}"><i class="fa fa-circle-o text-yellow"></i> <span>Roles</span></a></li>
-      </ul>
-    </section>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fa fa-dashboard"></i>
+              <p>
+                Dashboard
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-header">Main Navigation</li>
+          <li class="nav-item">
+            <a href="{{ route('employees.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-circle-o text-info"></i>
+              <p>Employees</p>
+            </a>
+          </li>
+
+          <li class="nav-header">User Management</li>
+           <li class="nav-item">
+            <a href="{{ route('users.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-circle-o text-info"></i>
+              <p>Users</p>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="{{ route('roles.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-circle-o text-info"></i>
+              <p>Roles</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
     <!-- /.sidebar -->
   </aside>

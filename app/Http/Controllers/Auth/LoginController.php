@@ -4,9 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Session;
-use Auth;
-
 
 class LoginController extends Controller
 {
@@ -42,25 +39,24 @@ class LoginController extends Controller
 
     public function login()
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-           $user = Auth::user();
-
+        if (auth()->attempt(['email' => request('email'), 'password' => request('password')])) {
+           $user = auth()->user();
 
             if (auth()->user()->status) {
-                $data['message'] = 'Login successful';
+                $data['message'] = config('message.login_success');
 
-                if (Auth::user()->hasRole('Admin')) {
+                if (auth()->user()->hasRole('Admin')) {
                     return redirect()->route('login');
                 } 
             } else {
-                $message = 'Account deactivated, Please contact system administrator.';
-                Session::flash('message', $message);
+                $message = config('message.account_deactivated');
+                session()->flash('message', $message);
                 return redirect()->back();
             }
         } else {
             // return 'test';
-            $message = 'Invalid credentials';
-            Session::flash('message', $message);
+            $message = config('message.invalid_credentials');
+            session()->flash('message', $message);
             return redirect()->back();
         }
     }

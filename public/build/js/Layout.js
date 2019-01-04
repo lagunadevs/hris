@@ -1,178 +1,142 @@
-/* Layout()
- * ========
- * Implements AdminLTE layout.
- * Fixes the layout height in case min-height fails.
- *
- * @usage activated automatically upon window load.
- *        Configure any options by passing data-option="value"
- *        to the body tag.
+/**
+ * --------------------------------------------
+ * AdminLTE Layout.js
+ * License MIT
+ * --------------------------------------------
  */
-+function ($) {
-  'use strict';
 
-  var DataKey = 'lte.layout';
+const Layout = (($) => {
+  /**
+   * Constants
+   * ====================================================
+   */
 
-  var Default = {
-    slimscroll : true,
-    resetHeight: true
-  };
+  const NAME               = 'Layout'
+  const DATA_KEY           = 'lte.layout'
+  const EVENT_KEY          = `.${DATA_KEY}`
+  const JQUERY_NO_CONFLICT = $.fn[NAME]
 
-  var Selector = {
-    wrapper       : '.wrapper',
-    contentWrapper: '.content-wrapper',
-    layoutBoxed   : '.layout-boxed',
-    mainFooter    : '.main-footer',
-    mainHeader    : '.main-header',
-    sidebar       : '.sidebar',
-    controlSidebar: '.control-sidebar',
-    fixed         : '.fixed',
-    sidebarMenu   : '.sidebar-menu',
-    logo          : '.main-header .logo'
-  };
-
-  var ClassName = {
-    fixed         : 'fixed',
-    holdTransition: 'hold-transition'
-  };
-
-  var Layout = function (options) {
-    this.options      = options;
-    this.bindedResize = false;
-    this.activate();
-  };
-
-  Layout.prototype.activate = function () {
-    this.fix();
-    this.fixSidebar();
-
-    $('body').removeClass(ClassName.holdTransition);
-
-    if (this.options.resetHeight) {
-      $('body, html, ' + Selector.wrapper).css({
-        'height'    : 'auto',
-        'min-height': '100%'
-      });
-    }
-
-    if (!this.bindedResize) {
-      $(window).resize(function () {
-        this.fix();
-        this.fixSidebar();
-
-        $(Selector.logo + ', ' + Selector.sidebar).one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-          this.fix();
-          this.fixSidebar();
-        }.bind(this));
-      }.bind(this));
-
-      this.bindedResize = true;
-    }
-
-    $(Selector.sidebarMenu).on('expanded.tree', function () {
-      this.fix();
-      this.fixSidebar();
-    }.bind(this));
-
-    $(Selector.sidebarMenu).on('collapsed.tree', function () {
-      this.fix();
-      this.fixSidebar();
-    }.bind(this));
-  };
-
-  Layout.prototype.fix = function () {
-    // Remove overflow from .wrapper if layout-boxed exists
-    $(Selector.layoutBoxed + ' > ' + Selector.wrapper).css('overflow', 'hidden');
-
-    // Get window height and the wrapper height
-    var footerHeight = $(Selector.mainFooter).outerHeight() || 0;
-    var headerHeight  = $(Selector.mainHeader).outerHeight() || 0;
-    var neg           = headerHeight + footerHeight;
-    var windowHeight  = $(window).height();
-    var sidebarHeight = $(Selector.sidebar).height() || 0;
-
-    // Set the min-height of the content and sidebar based on
-    // the height of the document.
-    if ($('body').hasClass(ClassName.fixed)) {
-      $(Selector.contentWrapper).css('min-height', windowHeight - footerHeight);
-    } else {
-      var postSetHeight;
-
-      if (windowHeight >= sidebarHeight) {
-        $(Selector.contentWrapper).css('min-height', windowHeight - neg);
-        postSetHeight = windowHeight - neg;
-      } else {
-        $(Selector.contentWrapper).css('min-height', sidebarHeight);
-        postSetHeight = sidebarHeight;
-      }
-
-      // Fix for the control sidebar height
-      var $controlSidebar = $(Selector.controlSidebar);
-      if (typeof $controlSidebar !== 'undefined') {
-        if ($controlSidebar.height() > postSetHeight)
-          $(Selector.contentWrapper).css('min-height', $controlSidebar.height());
-      }
-    }
-  };
-
-  Layout.prototype.fixSidebar = function () {
-    // Make sure the body tag has the .fixed class
-    if (!$('body').hasClass(ClassName.fixed)) {
-      if (typeof $.fn.slimScroll !== 'undefined') {
-        $(Selector.sidebar).slimScroll({ destroy: true }).height('auto');
-      }
-      return;
-    }
-
-    // Enable slimscroll for fixed layout
-    if (this.options.slimscroll) {
-      if (typeof $.fn.slimScroll !== 'undefined') {
-        // Destroy if it exists
-        // $(Selector.sidebar).slimScroll({ destroy: true }).height('auto')
-
-        // Add slimscroll
-        $(Selector.sidebar).slimScroll({
-          height: ($(window).height() - $(Selector.mainHeader).height()) + 'px'
-        });
-      }
-    }
-  };
-
-  // Plugin Definition
-  // =================
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this);
-      var data  = $this.data(DataKey);
-
-      if (!data) {
-        var options = $.extend({}, Default, $this.data(), typeof option === 'object' && option);
-        $this.data(DataKey, (data = new Layout(options)));
-      }
-
-      if (typeof option === 'string') {
-        if (typeof data[option] === 'undefined') {
-          throw new Error('No method named ' + option);
-        }
-        data[option]();
-      }
-    });
+  const Event = {
+    SIDEBAR: 'sidebar'
   }
 
-  var old = $.fn.layout;
+  const Selector = {
+    SIDEBAR        : '.main-sidebar',
+    HEADER         : '.main-header',
+    CONTENT        : '.content-wrapper',
+    CONTENT_HEADER : '.content-header',
+    WRAPPER        : '.wrapper',
+    CONTROL_SIDEBAR: '.control-sidebar',
+    LAYOUT_FIXED   : '.layout-fixed',
+    FOOTER         : '.main-footer'
+  }
 
-  $.fn.layout            = Plugin;
-  $.fn.layout.Constuctor = Layout;
+  const ClassName = {
+    HOLD        : 'hold-transition',
+    SIDEBAR     : 'main-sidebar',
+    LAYOUT_FIXED: 'layout-fixed'
+  }
 
-  // No conflict mode
-  // ================
-  $.fn.layout.noConflict = function () {
-    $.fn.layout = old;
-    return this;
-  };
+  /**
+   * Class Definition
+   * ====================================================
+   */
 
-  // Layout DATA-API
-  // ===============
-  $(window).on('load', function () {
-    Plugin.call($('body'));
-  });
-}(jQuery);
+  class Layout {
+    constructor(element) {
+      this._element = element
+
+      this._init()
+    }
+
+    // Public
+
+    fixLayoutHeight() {
+      const heights = {
+        window : $(window).height(),
+        header : $(Selector.HEADER).outerHeight(),
+        footer : $(Selector.FOOTER).outerHeight(),
+        sidebar: $(Selector.SIDEBAR).height()
+      }
+      const max     = this._max(heights)
+
+      $(Selector.CONTENT).css('min-height', max - (heights.header))
+      $(Selector.SIDEBAR).css('min-height', max - heights.header)
+    }
+
+    // Private
+
+    _init() {
+      // Enable transitions
+      $('body').removeClass(ClassName.HOLD)
+
+      // Activate layout height watcher
+      this.fixLayoutHeight()
+      $(Selector.SIDEBAR)
+        .on('collapsed.lte.treeview expanded.lte.treeview collapsed.lte.pushmenu expanded.lte.pushmenu', () => {
+          this.fixLayoutHeight()
+        })
+
+      $(window).resize(() => {
+        this.fixLayoutHeight()
+      })
+
+      $('body, html').css('height', 'auto')
+    }
+
+    _max(numbers) {
+      // Calculate the maximum number in a list
+      let max = 0
+
+      Object.keys(numbers).forEach((key) => {
+        if (numbers[key] > max) {
+          max = numbers[key]
+        }
+      })
+
+      return max
+    }
+
+    // Static
+
+    static _jQueryInterface(operation) {
+      return this.each(function () {
+        let data = $(this)
+          .data(DATA_KEY)
+
+        if (!data) {
+          data = new Layout(this)
+          $(this).data(DATA_KEY, data)
+        }
+
+        if (operation) {
+          data[operation]()
+        }
+      })
+    }
+  }
+
+  /**
+   * Data API
+   * ====================================================
+   */
+  $(window).on('load', () => {
+    Layout._jQueryInterface.call($('body'))
+  })
+
+  /**
+   * jQuery API
+   * ====================================================
+   */
+
+  $.fn[NAME] = Layout._jQueryInterface
+  $.fn[NAME].Constructor = Layout
+  $.fn[NAME].noConflict  = function () {
+    $.fn[NAME] = JQUERY_NO_CONFLICT
+    return Layout._jQueryInterface
+  }
+
+  return Layout
+})(jQuery)
+
+export default Layout

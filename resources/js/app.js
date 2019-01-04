@@ -35,6 +35,7 @@ Vue.use(Vuelidate)
  */
 
 import router from './routes';
+import store from './store';
 import components from './components/components';
 
 
@@ -42,7 +43,8 @@ import components from './components/components';
 const app = new Vue({
 	
     el: '#app',
-    router
+    router,
+    store
    
 });
 // const files = require.context('./', true, /\.vue$/i)
