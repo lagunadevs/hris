@@ -75,7 +75,7 @@ Route::group(['prefix' => 'companies'], function() {
 
 
 Route::get('v1/employees', 'Api\EmployeeController@index')->name('api.employees');
-Route::post('v1/employees', 'Api\EmployeeController@store')->name('api.employees');
-Route::post('v1/employees/{id}', 'Api\EmployeeController@store')->name('api.employees');
+Route::post('v1/employees', 'Api\EmployeeController@store')->name('store.employees');
+Route::get('v1/employees/{id}', 'Api\EmployeeController@edit')->name('edit.employees');
 Route::delete('v1/employees/{id}', 'Api\EmployeeController@store')->name('api.employees');
 

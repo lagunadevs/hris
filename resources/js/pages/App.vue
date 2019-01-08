@@ -1,8 +1,6 @@
 <template>
 	<div class="wrapper">
-	
-		<topbar></topbar>
-		
+		<topbar id="navbar"></topbar>
 		<sidebar></sidebar>
 	
 	    <div class="content">
@@ -15,6 +13,7 @@
 	.content {
 
 	}
+	
 </style>
 
 <script>

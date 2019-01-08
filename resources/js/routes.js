@@ -31,6 +31,16 @@ const router = new VueRouter({
         path:'/employees',
         name: 'employees',
         component: require('./pages/employees/index.vue')
+      },
+      {
+        path:'/employees/create',
+        name: 'create',
+        component: require('./pages/employees/create.vue')
+      },
+      {
+        path:'/employees/edit/:employeeId',
+        name: 'edit',
+        component: require('./pages/employees/edit.vue')
       }
   ],
   mode: process.env.MIX_BROWSER_MODE,
