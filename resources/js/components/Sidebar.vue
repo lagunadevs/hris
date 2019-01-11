@@ -1,6 +1,6 @@
 <template>
 
-    <div class="wrapper">
+    <div class="wrapper" type="dark" variant="info">
       <div class="sidebar bg-dark">
 
         <div class="search">
