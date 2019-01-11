@@ -11,6 +11,7 @@
 |
 */
 
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -18,6 +19,8 @@
 Route::post('auto-pull', function () {
     exec('git pull');
 });
+//App::bind('App\Deductions\TaxInterface','App\Deductions\Malaysia');
+
 
 
 Route::get('/login', function () {
@@ -28,7 +31,7 @@ Route::get('/login', function () {
 Route::post('/login', 'Auth\LoginController@login')->name('web.login');
 Route::get('/logout', function() {
 	auth()->logout();
-    return view('login ');
+    return view('login');
 })->name('web.logout');
 
 
@@ -38,7 +41,12 @@ Route::middleware('auth')->group(function () {
 	});
 });
 
+
 Auth::routes(['verify' => true]);
+
+
+
+Route::resource('employees', 'Admin\EmployeeController');
 
 Route::get('/{vue_capture?}', function () {
 	return view('front_end.index');

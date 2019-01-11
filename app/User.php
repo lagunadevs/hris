@@ -16,6 +16,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use HasRoles;
 
+
+    protected $dates = ['expiration_date'];
     /**
      * The attributes that are mass assignable.
      *
@@ -80,6 +82,7 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
         }
     }
+
 
     public function company()
     {

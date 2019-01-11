@@ -52,13 +52,13 @@ class CompanyController extends Controller
 		$company->save();
 		$company->password = request('password');
 		$data['company'] = $company;
-		$data['message'] = 'Success';
-
 		$this->register($company);
-		return response()->json($company, 200);
+
+		return response()->json('Success', 200);
 
     }
 
+    //register contact person provided in register page.
     public function register($company)
     {
 
@@ -72,22 +72,25 @@ class CompanyController extends Controller
 
     }
 
+    //send verification link to email provided in registration page
     public function sendVerification($user)
     {
 
         $email = $user->email;
 
-        $url = url('api/companies',$user->id);
+        $url = url('api/companies/user',$user->id);
 
         Mail::send(('emails.verify'), ['user' => $user, 'url' => $url], function ($message) use ($email) {
            $message->to($email);
            $message->subject("SeaPayroll Verification");
-           $message->from(env('MAIL_FROM_EMAIL'));
+           $message->from(env('MAIL_FROM_EMAIL'), 'yeorem1019@gmail.com');
         });
 
     }
 
-    public function edit($id)
+
+    //verify user
+    public function verify($id)
     {	
 
     	$user = User::find($id);
@@ -103,12 +106,12 @@ class CompanyController extends Controller
         if ($user->email_verified_at) {
             
             return response()->json([
-                'message' => 'You are already verified, Please Login to to your dashboard.'
+                'message' => 'This verification Link is expired.'
             ], 404);
 
         }
 
-    	if (Carbon::parse($user->created_at)->addMinutes(2)->isPast()) {
+    	if (Carbon::parse($user->created_at)->addMinutes(720)->isPast()) {
             
             $user->company()->delete();
 

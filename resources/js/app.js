@@ -26,6 +26,12 @@ Vue.use(VueSweetAlert)
 
 import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
+
+import VueSweetalert2 from 'vue-sweetalert2';
+Vue.use(VueSweetalert2);
+
+import MenuIcon from "vue-material-design-icons/Menu.vue"
+Vue.component("menu-icon", MenuIcon)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -35,14 +41,23 @@ Vue.use(Vuelidate)
  */
 
 import router from './routes';
+import store from './store';
 import components from './components/components';
+
+import { apiHost } from './config'
+
+
+import 'bootstrap'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
 const app = new Vue({
 	
     el: '#app',
-    router
+    router,
+    store,
+    apiHost
    
 });
 // const files = require.context('./', true, /\.vue$/i)

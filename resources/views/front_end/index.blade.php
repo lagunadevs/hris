@@ -6,9 +6,12 @@
         <title>Laravel</title>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
         <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="csrf-token" value="{{ csrf_token() }}" />
+        <style type="text/css"> html, body {margin: 0; height: 100%; overflow: auto} </style>
     </head>
-    <body>
+    <body class="fixed-left">
+
         <div id="app">
           <!-- <topbar></topbar>
           <sidebar></sidebar> -->
