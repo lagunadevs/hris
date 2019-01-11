@@ -2,7 +2,6 @@
 
     <div class="wrapper" type="dark" variant="info">
       <div class="sidebar bg-dark">
-
         <div class="search">
           <center>
             <input class="searchBox" 
@@ -10,8 +9,7 @@
                   type="text"
                   placeholder="Search"
                   v-on:input="searchContent()">
-          </center>
-           
+          </center>          
         </div>
 
         <div v-for="content in contents">

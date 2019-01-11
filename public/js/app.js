@@ -72152,7 +72152,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n.container {\n\n  margin-top: 5%;\n}  \n\n", ""]);
+exports.push([module.i, "\n.container {\n\n  margin-top: 5%;\n}  \n", ""]);
 
 // exports
 
@@ -72191,216 +72191,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-
-        this.getUsers(window.location.origin + '/api/v1/employees');
+        this.employees.fetch();
     },
-
 
     methods: {
-
-        getUsers: function getUsers(url) {
+        createTodo: function createTodo() {
             var _this = this;
 
-            axios.get(url, {
-                headers: {
-                    'Authorization': this.header_authorization,
-                    'Accept': this.header_accept
-                }
-            }).then(function (response) {
-                _this.users = response.data.data;
-                if (_this.users.length > 0) {
-                    _this.noResultFound = true;
-                } else {
-                    _this.noResultFound = false;
-                }
-                _this.pagination = response.data.meta;
-                //get last page item
-                _this.pages = response.data.meta.last_page;
-                _this.path = response.data.meta.path;
-
-                _this.firstPage = response.data.links.first;
-                _this.nextPage = response.data.links.next;
-                _this.prevPage = response.data.links.prev;
-                _this.lastPage = response.data.meta.last_page;
-                console.log(_this.users);
+            this.employees.create({ name: this.newTodo }).then(function (resp) {
+                _this.newTodo = '';
             });
         },
-
-        getRoles: function getRoles(url) {
-            var _this2 = this;
-
-            axios.get(url, {
-                headers: {
-                    'Authorization': this.header_authorization,
-                    'Accept': this.header_accept
-                }
-            }).then(function (response) {
-                _this2.roles = response.data.data;
-            });
+        getEmployee: function getEmployee(employee) {
+            this.$router.push({ name: 'edit', params: { employeeId: employee } });
+            console.log(id);
         },
-        filter: function filter() {
-            if (this.search && this.search.length >= 3) {
-                this.searchFunction();
-            } else {
-                this.searchFunction();
-            }
-        },
-        searchFunction: function searchFunction() {
-            var _this3 = this;
+        removeEmployee: function removeEmployee(employee) {
 
-            axios.get(window.location.origin + '' + "?search=" + this.search + "&role=" + this.filterByRoles).then(function (response) {
-                console.log(response);
-                _this3.users = response.data.data;
-                if (_this3.users.length > 0) {
-                    _this3.noResultFound = true;
-                } else {
-                    _this3.noResultFound = false;
-                }
-
-                _this3.pagination = response.data.meta;
-                //get last page item
-                _this3.pages = response.data.meta.last_page;
-                _this3.path = response.data.meta.path;
-
-                _this3.firstPage = response.data.links.first;
-                _this3.nextPage = response.data.links.next;
-                _this3.prevPage = response.data.links.prev;
-                _this3.lastPage = response.data.links.last_page;
-            });
-        },
-
-        isCurrentPage: function isCurrentPage(page) {
-            return this.pagination.current_page === page;
-        },
-
-        editUser: function editUser(user) {
-            console.log(user.id);
-            // console.log(window.location.href)
-            window.location.href = "{{request()->root().'/employees' }}/" + user.id + "/edit";
-        },
-
-        changePage: function changePage(page, step) {
-            // console.log(this.lastPage)
-            console.log(page);
-
-            if (page) {
-                this.pagination.current_page = page;
-                if (step == 'previous' && this.pagination.current_page >= 1) {
-                    this.products = [];
-                    this.getUsers(this.prevPage);
-                } else if (step == 'next' && this.pagination.current_page <= this.pagination.last_page) {
-                    this.products = [];
-                    this.getUsers(this.nextPage);
-                } else if (!step) {
-                    this.products = [];
-                    this.getUsers(this.path + "?page=" + page + "&role=" + this.filterByRoles);
-                }
-            }
-        },
-
-        deleteUser: function deleteUser(user) {
-            console.log(user);
-            Vue.swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then(function (result) {
-                if (result.value) {
-                    axios.delete("{{url('users')}}/" + user.id, {
-                        headers: {
-                            'Authorization': this.header_authorization,
-                            'Accept': this.header_accept
-                        }
-                    }).then(function (response) {
-                        swal("Success!", response.data.message, "success");
-                        setTimeout(function () {
-                            window.location.reload(1);
-                        }, 2000);
-                    }).catch(function (error) {
-                        console.log(error.response.data.errors);
-                        swal("Failed!", JSON.stringify(error.response.data.message), "info");
-                    });
-                }
-            });
+            employee.remove();
         }
+        // companiesempty () {
+        //     this.employees.empty();
+        // },
+        // hideModal () {
+        //     this.$refs.myModalRef.hide()
+        // }
     },
     data: function data() {
-
         return {
-            // Note 'isActive' is left out and will not appear in the rendered table
-            employees: [],
-            meta: [],
-            users: [],
-            roles: [],
-            search: '',
-            filterByRoles: '',
-            pagination: '',
-            pages: '',
-            from: '',
-            to: '',
-            offset: '',
-            firstPage: '',
-            nextPage: '',
-            prevPage: '',
-            lastPage: '',
-            noResultFound: false
+            fields: [{
+                key: 'last_name',
+                label: 'Last Name',
+                sortable: true
+            }, {
+                key: 'first_name',
+                label: 'First Name'
+            }, {
+                key: 'email',
+                label: 'Email',
+                sortable: true
+            }, {
+                key: 'action',
+                label: 'Action'
+            }],
+
+            employees: this.$collection({
+                url: window.location.origin + '/api/v1/employees'
+            }),
+            newTodo: ''
         };
     }
 });
@@ -72413,248 +72254,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "wrapper" },
-    [
-      _c("breadcrumbs"),
-      _vm._v(" "),
-      _c("div", [
-        _c("div", { staticClass: "row pb-2" }, [
-          _c("div", { staticClass: "col-md-3" }, [
-            _c(
-              "a",
-              { attrs: { href: "" } },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass:
-                      "btn btn-success btn-custom waves-effect w-md waves-light m-b-5 pull-left",
-                    attrs: { to: { name: "create" } }
-                  },
-                  [
-                    _c("i", { staticClass: "fa fa-plus" }),
-                    _vm._v("Add Employee")
-                  ]
-                )
-              ],
-              1
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("table", { staticClass: "table table-bordered" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              { attrs: { align: "center" } },
-              [
-                _vm._l(_vm.users, function(user) {
-                  return _vm.users
-                    ? _c("tr", [
-                        _c("td", [_vm._v(_vm._s(user.name))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.email))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.created_at))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "row" }, [
-                            _c(
-                              "div",
-                              { staticClass: "col-md-6" },
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "btn btn-info btn-block",
-                                    attrs: {
-                                      to: {
-                                        name: "edit",
-                                        params: { employeeId: user.id }
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", { staticClass: "fa fa-plus" }),
-                                    _vm._v(" Edit ")
-                                  ]
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-block",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.deleteUser(user)
-                                    }
-                                  }
-                                },
-                                [_vm._v(" Delete ")]
-                              )
-                            ])
-                          ])
-                        ])
-                      ])
-                    : _vm._e()
-                }),
-                _vm._v(" "),
-                _vm.users.length == 0
-                  ? _c("tr", [
-                      _c(
-                        "td",
-                        { staticClass: "text-center", attrs: { colspan: "8" } },
-                        [_vm._v("No data found")]
-                      )
-                    ])
-                  : _vm._e()
-              ],
-              2
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row pt-4" }, [
-          _c("div", { staticClass: "col-sm-12 col-md-12" }, [
-            _c(
-              "ul",
-              { staticClass: "pagination" },
-              [
-                _c(
-                  "li",
-                  {
-                    staticClass: "paginate_button page-item previous",
-                    attrs: { id: "datatable-editable_previous" }
-                  },
-                  [
+  return _c("div", { staticClass: "wrapper" }, [
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c("b-table", {
+            attrs: {
+              striped: "",
+              hover: "",
+              items: _vm.employees,
+              fields: _vm.fields
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "action",
+                fn: function(row) {
+                  return [
                     _c(
-                      "a",
+                      "b-button",
                       {
-                        staticClass: "page-link",
-                        attrs: {
-                          href: "#",
-                          "aria-controls": "datatable-editable",
-                          "data-dt-idx": "0",
-                          tabindex: "0",
-                          disabled:
-                            _vm.pagination.current_page == _vm.pagination.from
-                        },
                         on: {
                           click: function($event) {
-                            $event.preventDefault()
-                            _vm.changePage(
-                              _vm.pagination.current_page - 1,
-                              "previous"
-                            )
+                            _vm.getEmployee(row.item.id)
                           }
                         }
                       },
-                      [_vm._v("Previous")]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._l(_vm.pages, function(page) {
-                  return _c(
-                    "li",
-                    { staticClass: "paginate_button page-item active" },
-                    [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "page-link",
-                          class: _vm.isCurrentPage(page)
-                            ? "is-current selected-page"
-                            : "",
-                          attrs: {
-                            href: "#",
-                            "aria-controls": "datatable-editable",
-                            "data-dt-idx": "1",
-                            tabindex: "0"
-                          },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.changePage(page)
-                            }
-                          }
-                        },
-                        [_vm._v(_vm._s(page))]
-                      )
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass: "paginate_button page-item next",
-                    attrs: { id: "datatable-editable_next" }
-                  },
-                  [
+                      [_vm._v("\n                Edit\n            ")]
+                    ),
+                    _vm._v(" "),
                     _c(
-                      "a",
+                      "b-button",
                       {
-                        staticClass: "page-link",
-                        attrs: {
-                          href: "#",
-                          "aria-controls": "datatable-editable",
-                          "data-dt-idx": "7",
-                          tabindex: "0",
-                          disabled:
-                            _vm.pagination.current_page >=
-                            _vm.pagination.last_page
-                        },
                         on: {
                           click: function($event) {
-                            $event.preventDefault()
-                            _vm.changePage(
-                              _vm.pagination.current_page + 1,
-                              "next"
-                            )
+                            _vm.removeEmployee(row.item.id)
                           }
                         }
                       },
-                      [_vm._v("Next")]
+                      [_vm._v("\n                Delete\n            ")]
                     )
                   ]
-                )
-              ],
-              2
-            )
-          ])
-        ])
-      ])
-    ],
-    1
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { attrs: { align: "center" } }, [
-      _c("tr", [
-        _c("th", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", { attrs: { width: "20%" } }, [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", { attrs: { width: "18%" } }, [_vm._v("Date / Time Created")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Operations")])
-      ])
+                }
+              }
+            ])
+          })
+        ],
+        1
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
