@@ -8,6 +8,7 @@
         <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="csrf-token" value="{{ csrf_token() }}" />
+        <meta name="api-version" value="{{ config('app.api_version') }}" />
         <style type="text/css"> html, body {margin: 0; height: 100%; overflow: auto} </style>
     </head>
     <body class="fixed-left">

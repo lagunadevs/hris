@@ -28,6 +28,21 @@ const router = new VueRouter({
         component: require('./pages/Dashboard.vue')
       },
       {
+        path:'/departments',
+        name: 'departments.index',
+        component: require('./pages/departments/index.vue')
+      },
+      {
+        path:'/departments/create',
+        name: 'departments.create',
+        component: require('./pages/departments/create.vue')
+      },
+      {
+        path:'/departments/edit/:id',
+        name: 'departments.edit',
+        component: require('./pages/departments/edit.vue')
+      },
+      {
         path:'/employees',
         name: 'employees',
         component: require('./pages/employees/index.vue')
