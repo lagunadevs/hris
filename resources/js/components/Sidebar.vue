@@ -96,7 +96,12 @@
         return {
           sideBarContent: null,
           search : '',
-          contents: [ {
+          contents: [ 
+          {
+            name : "Departments",
+            route : "departments"
+          },
+          {
             name : "Employees",
             route : "employees"
           },

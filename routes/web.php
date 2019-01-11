@@ -11,6 +11,9 @@
 |
 */
 
+include_once('app_api.php');
+include_once('admin.php');
+
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -48,6 +51,9 @@ Auth::routes(['verify' => true]);
 
 Route::resource('employees', 'Admin\EmployeeController');
 
-Route::get('/{vue_capture?}', function () {
+Route::get('app', function () {
 	return view('front_end.index');
-})->where('vue_capture', '[\/\w\.-]*');
+});
+// Route::get('/{vue_capture?}', function () {
+// 	return view('front_end.index');
+// })->where('vue_capture', '[\/\w\.-]*');
