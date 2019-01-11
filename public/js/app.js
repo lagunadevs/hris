@@ -72191,6 +72191,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -72206,12 +72209,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         getEmployee: function getEmployee(employee) {
+
             this.$router.push({ name: 'edit', params: { employeeId: employee } });
             console.log(id);
         },
         removeEmployee: function removeEmployee(employee) {
 
             employee.remove();
+        },
+        addEmployee: function addEmployee() {
+
+            this.$router.push({ name: 'create' });
         }
         // companiesempty () {
         //     this.employees.empty();
@@ -72255,55 +72263,73 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "wrapper" }, [
-    _c("div", { staticClass: "container" }, [
-      _c(
-        "div",
-        { staticClass: "card-body" },
-        [
-          _c("b-table", {
-            attrs: {
-              striped: "",
-              hover: "",
-              items: _vm.employees,
-              fields: _vm.fields
-            },
-            scopedSlots: _vm._u([
-              {
-                key: "action",
-                fn: function(row) {
-                  return [
-                    _c(
-                      "b-button",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.getEmployee(row.item.id)
-                          }
-                        }
-                      },
-                      [_vm._v("\n                Edit\n            ")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-button",
-                      {
-                        on: {
-                          click: function($event) {
-                            _vm.removeEmployee(row.item.id)
-                          }
-                        }
-                      },
-                      [_vm._v("\n                Delete\n            ")]
-                    )
-                  ]
-                }
+    _c(
+      "div",
+      { staticClass: "container" },
+      [
+        _c(
+          "b-button",
+          {
+            on: {
+              click: function($event) {
+                _vm.addEmployee()
               }
-            ])
-          })
-        ],
-        1
-      )
-    ])
+            }
+          },
+          [_vm._v("\n        Add\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          [
+            _c("b-table", {
+              attrs: {
+                striped: "",
+                hover: "",
+                items: _vm.employees,
+                fields: _vm.fields
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "action",
+                  fn: function(row) {
+                    return [
+                      _c(
+                        "b-button",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.getEmployee(row.item.id)
+                            }
+                          }
+                        },
+                        [_vm._v("\n                Edit\n            ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        {
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              _vm.removeEmployee(row.item)
+                            }
+                          }
+                        },
+                        [_vm._v("\n                Delete\n            ")]
+                      )
+                    ]
+                  }
+                }
+              ])
+            })
+          ],
+          1
+        )
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -76733,7 +76759,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -76744,8 +76770,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //
@@ -77167,8 +77191,6 @@ exports.push([module.i, "\n.searchBox {\n    border: 2px solid white;\n    text-
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //

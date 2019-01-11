@@ -1,13 +1,16 @@
 <template>
   <div class="wrapper">
     <div class="container">
+      <b-button @click="addEmployee()">
+          Add
+      </b-button>
       <div class="card-body">
         <b-table striped hover :items="employees" :fields="fields" >
             <template slot="action" slot-scope="row">
               <b-button @click="getEmployee(row.item.id)">
                   Edit
               </b-button>
-              <b-button @click="removeEmployee(row.item.id)">
+              <b-button @click.stop="removeEmployee(row.item)">
                   Delete
               </b-button>
             </template>
@@ -40,14 +43,21 @@
                     });
             },
             getEmployee :function(employee) {
+
                 this.$router.push({ name: 'edit', params: { employeeId: employee} }) 
                 console.log(id);
+
             },
             removeEmployee : function(employee) {
 
                 employee.remove();
 
             },
+            addEmployee : function() {
+
+                this.$router.push({ name: 'create' }) 
+
+            }
             // companiesempty () {
             //     this.employees.empty();
             // },
