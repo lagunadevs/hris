@@ -99,7 +99,7 @@
           contents: [ 
           {
             name : "Departments",
-            route : "departments"
+            route : "departments.index"
           },
           {
             name : "Employees",

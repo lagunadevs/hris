@@ -7,7 +7,6 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group">
                                 <label for="name">Name
-                                    <small></small>
                                 </label>
                                 <input 
                                     id="name" 
@@ -17,7 +16,9 @@
                                     class="form-control" 
                                     v-model="name" />
                             </div>
-                           
+                           <div v-for="department in departments" :key="department.id">
+                              {{ department.name }}
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -32,21 +33,31 @@
             this.departments.fetch();
             var id = this.$route.params.id;
             this.departments.get(id);
+            //console.log('mounted')
+            //this.name = this.departments.name;
+            this.create();
         },
         methods: {
             create() {
-                this.departments
-                    .create({ name: this.name })
-                    .then(resp => {
-                        //this.name = '';
-                        //this.$router.push({ name: 'departments.index', params: { app_id: 1 }})
-                    });
+              axios.post('/departments', {
+                    name: 'hey axios',
+                }).then(response => {
+                    //this.$router.push({ name: 'apps.plans.show', params: { plan_id: this.$route.params.plan_id }})
+                    // console.log(response.data);
+                })
+                // this.departments
+                //     .create({ name: this.name })
+                //     .then(resp => {
+                //         //this.name = '';
+                //         this.$router.push({ name: 'departments.index', params: { app_id: 1 }})
+                //     });
             }
         },
         data() {
+            //console.log('dta')
             return {
                 departments: this.$collection({
-                    url: '/api/v1/departments'
+                  url: '/departments'
                 }),
                 name: ''
             }
